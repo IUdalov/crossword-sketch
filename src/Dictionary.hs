@@ -1,4 +1,4 @@
-module Dictionary (Dictionary, SubDictionary, dictFromFile) where
+module Dictionary (Dictionary, SubDictionary, dictFromFile, getByPattern, unixDict) where
 
 import qualified Data.Map.Lazy as M
 import Data.Char (isPrint, toLower)
@@ -25,7 +25,7 @@ insertToDict dict word = M.insert len ( (normalizeWord word) : dict `ind` len) d
 
 -- searching ------------------------------------------------------------------
 -- patern [..ske.l] haskell
-getByPattern :: Dictionary -> String -> SubDictionary
+getByPattern :: Dictionary -> String -> [String]
 getByPattern dict pattern = filter (matchWord pattern) (dict `ind` pos)
     where pos = length pattern
 
